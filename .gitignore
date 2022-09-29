@@ -3,3 +3,7 @@
 
 # CMake build files
 cmake-build-debug
+
+# KossuthSquare images
+/week4/KossuthSquare/
+/week3/padlolapok/
