@@ -15,5 +15,8 @@ target_link_libraries(week2_montage ${OpenCV_LIBS})
 add_executable(week2_pixel_manipulation week2/pixel_manipulation.cpp)
 target_link_libraries(week2_pixel_manipulation ${OpenCV_LIBS})
 
-add_executable(week4_padlolapok week3/padlolapok.cpp)
-target_link_libraries(week4_padlolapok ${OpenCV_LIBS})
+add_executable(week3_padlolapok week3/padlolapok.cpp)
+target_link_libraries(week3_padlolapok ${OpenCV_LIBS})
+
+add_executable(week4_histogram week4/histogram.cpp lib/histo.cpp lib/histo.hpp)
+target_link_libraries(week4_histogram ${OpenCV_LIBS})
