@@ -12,11 +12,14 @@ void copy_foreground(const cv::Mat& src, cv::Mat& dst, const int type = CV_8UC3)
         cv::resize(dst, dst, src.size());
     }
 
+    cv::Mat hsv;
+    cv::cvtColor(src, hsv, cv::COLOR_BGR2HSV);
+
     for (int i = 0; i < src.rows; i++) {
         for (int j = 0; j < src.cols; j++) {
-            const auto& c = src.at<cv::Vec3b>(i, j);
-            if (c[2] > c[0] && c[2] > c[1]) {
-                dst.at<cv::Vec3b>(i, j) = c;
+            cv::Vec3b c = hsv.at<cv::Vec3b>(i, j);
+            if (c[0] < 40) {
+                dst.at<cv::Vec3b>(i, j) = src.at<cv::Vec3b>(i, j);
             }
         }
     }
