@@ -2,32 +2,34 @@
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
+#include "../lib/histo.hpp"
+
+int calc_th_value(const cv::Mat& src, float ratio = 0.1f) {
+    int n_fg = (int)((float)src.rows * (float)src.cols * ratio);
+    cv::Mat hist;
+    Histo::calcHistoC1(src, hist);
+
+    int s = 0;
+    for (int th = 0; th < 256; th++) {
+        s += hist.at<int>(th);
+        if (s >= n_fg) return th;
+    }
+
+    return 255; // hiba
+}
+
 
 int main() {
-    cv::VideoCapture capture;
-    capture.open("/Users/klevcsoo/Developer/deik-kepfeldolgozas/week5/sas.avi");
-    if (!capture.isOpened()) {
-        std::cout << "Nem nyitható" << std::endl;
-        return -1;
-    }
+    cv::Mat img = cv::imread(
+            "/Users/klevcsoo/Developer/deik-kepfeldolgozas/week5/scanned3.png",
+            CV_8UC1
+    );
+    cv::Mat dest;
 
-    cv::Mat img, gray, mask, dest;
-    const int target_fps = 1000 / 30;
-    while (true) {
-        capture >> img;
-        if (img.empty()) {
-            break;
-        }
+    int th = calc_th_value(img, 0.1f);
+    cv::threshold(img, dest, th, 255, cv::THRESH_BINARY);
+    cv::imshow("szoveg", dest);
 
-        cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
-        cv::inRange(gray, 100, 155, mask);
-        cv::medianBlur(mask, mask, 9);
-        dest = img.clone();
-        dest.setTo(0, mask);
-
-        cv::imshow("sas", dest);
-        cv::waitKey(target_fps);
-    }
-
+    cv::waitKey();
     return 0;
 }
