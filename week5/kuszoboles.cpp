@@ -7,21 +7,17 @@
 int main() {
 
     cv::Mat img = cv::imread(
-            "/Users/klevcsoo/Developer/deik-kepfeldolgozas/week5/dog.jpg",
-            cv::IMREAD_GRAYSCALE
+            "/Users/klevcsoo/Developer/deik-kepfeldolgozas/week5/madar.jpg",
+            cv::IMREAD_COLOR
     );
-    Histo::showHisto(img, "eredeti histo", 1);
+    std::vector<cv::Mat> chs;
+    cv::split(img, chs);
 
-    cv::Mat dest;
-    std::cout << cv::threshold(img, dest, 100, 255, THRESH_BINARY);
-    cv::medianBlur(dest, dest, 5);
-    cv::imshow("kuszobolt", dest);
+    cv::Mat mask, dest;
+    cv::threshold(chs[0], mask, 120, 255, THRESH_BINARY);
 
-    cv::Mat dest2;
-    cv::threshold(img, dest2, 100, 255, THRESH_TOZERO);
-
-    cv::imshow("eredeti", img);
-    cv::imshow("vagott", dest2);
+    img.copyTo(dest, mask);
+    cv::imshow("dest", dest);
 
     cv::waitKey();
     return 0;
