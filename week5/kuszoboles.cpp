@@ -2,23 +2,32 @@
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
-#include "../lib/histo.hpp"
 
 int main() {
+    cv::VideoCapture capture;
+    capture.open("/Users/klevcsoo/Developer/deik-kepfeldolgozas/week5/sas.avi");
+    if (!capture.isOpened()) {
+        std::cout << "Nem nyitható" << std::endl;
+        return -1;
+    }
 
-    cv::Mat img = cv::imread(
-            "/Users/klevcsoo/Developer/deik-kepfeldolgozas/week5/madar.jpg",
-            cv::IMREAD_COLOR
-    );
-    std::vector<cv::Mat> chs;
-    cv::split(img, chs);
+    cv::Mat img, gray, mask, dest;
+    const int target_fps = 1000 / 30;
+    while (true) {
+        capture >> img;
+        if (img.empty()) {
+            break;
+        }
 
-    cv::Mat mask, dest;
-    cv::threshold(chs[0], mask, 120, 255, THRESH_BINARY);
+        cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
+        cv::inRange(gray, 100, 155, mask);
+        cv::medianBlur(mask, mask, 9);
+        dest = img.clone();
+        dest.setTo(0, mask);
 
-    img.copyTo(dest, mask);
-    cv::imshow("dest", dest);
+        cv::imshow("sas", dest);
+        cv::waitKey(target_fps);
+    }
 
-    cv::waitKey();
     return 0;
 }
