@@ -8,15 +8,12 @@
 #include <vector>
 #include <opencv2/core.hpp>
 
-using namespace std;
-using namespace cv;
-
 namespace Histo {
     void calcHistoC1(const cv::Mat img, cv::Mat& histo);
-    void calcHistoC3(const cv::Mat img, vector<cv::Mat>& histo);
+    void calcHistoC3(const cv::Mat img, std::vector<cv::Mat>& histo);
 
     void drawHistoC1(const cv::Mat histo, cv::Mat& canvas, int channel = -1);
-    void drawHistoC3(const vector<cv::Mat> histos, vector<cv::Mat>& canvases);
+    void drawHistoC3(const std::vector<cv::Mat> histos, std::vector<cv::Mat>& canvases);
 
     /// <summary>
     /// Egy kep hisztogramjanak megjelenitese.
@@ -24,7 +21,7 @@ namespace Histo {
     /// <param name="img">1 vagy 3 csatornas input kep</param>
     /// <param name="title">ablaknev</param>
     /// <param name="wait">varakoztatas</param>
-    void showHisto(Mat img, string title = "histo", int wait = 0);
+    void showHisto(cv::Mat img, std::string title = "histo", int wait = 0);
 };
 
 
