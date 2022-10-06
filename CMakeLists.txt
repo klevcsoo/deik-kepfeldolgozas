@@ -20,3 +20,6 @@ target_link_libraries(week3_padlolapok ${OpenCV_LIBS})
 
 add_executable(week4_histogram week4/histogram.cpp lib/histo.cpp lib/histo.hpp)
 target_link_libraries(week4_histogram ${OpenCV_LIBS})
+
+add_executable(week5_kuszoboles week5/kuszoboles.cpp lib/histo.cpp lib/histo.hpp)
+target_link_libraries(week5_kuszoboles ${OpenCV_LIBS})
