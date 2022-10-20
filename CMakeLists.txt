@@ -26,3 +26,6 @@ target_link_libraries(week5_kuszoboles ${OpenCV_LIBS})
 
 add_executable(week7_konturkezeles week7/konturkezeles.cpp)
 target_link_libraries(week7_konturkezeles ${OpenCV_LIBS})
+
+add_executable(week7_savkizaras week7/savkizaras.cpp)
+target_link_libraries(week7_savkizaras ${OpenCV_LIBS})
