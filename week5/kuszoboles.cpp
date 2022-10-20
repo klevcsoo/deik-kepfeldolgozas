@@ -21,14 +21,16 @@ int calc_th_value(const cv::Mat& src, float ratio = 0.1f) {
 
 int main() {
     cv::Mat img = cv::imread(
-            "/Users/klevcsoo/Developer/deik-kepfeldolgozas/week5/scanned3.png",
+            "/Users/klevcsoo/Developer/deik-kepfeldolgozas/week5/zh.jpg",
             CV_8UC1
     );
     cv::Mat dest;
 
-    int th = calc_th_value(img, 0.1f);
-    cv::threshold(img, dest, th, 255, cv::THRESH_BINARY);
-    cv::imshow("szoveg", dest);
+    cv::adaptiveThreshold(
+            img, dest, 255, cv::ADAPTIVE_THRESH_MEAN_C,
+            cv::THRESH_BINARY, 41, 10
+    );
+    cv::imshow("ZH", dest);
 
     cv::waitKey();
     return 0;
