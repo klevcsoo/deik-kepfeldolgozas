@@ -23,3 +23,6 @@ target_link_libraries(week4_histogram ${OpenCV_LIBS})
 
 add_executable(week5_kuszoboles week5/kuszoboles.cpp lib/histo.cpp lib/histo.hpp)
 target_link_libraries(week5_kuszoboles ${OpenCV_LIBS})
+
+add_executable(week7_konturkezeles week7/konturkezeles.cpp)
+target_link_libraries(week7_konturkezeles ${OpenCV_LIBS})
