@@ -29,3 +29,15 @@ target_link_libraries(week7_konturkezeles ${OpenCV_LIBS})
 
 add_executable(week7_savkizaras week7/savkizaras.cpp)
 target_link_libraries(week7_savkizaras ${OpenCV_LIBS})
+
+add_executable(zh_feladat4 zh/feladat4.cpp)
+target_link_libraries(zh_feladat4 ${OpenCV_LIBS})
+
+add_executable(zh_feladat3 zh/feladat3.cpp)
+target_link_libraries(zh_feladat3 ${OpenCV_LIBS})
+
+add_executable(zh_feladat2 zh/feladat2.cpp)
+target_link_libraries(zh_feladat2 ${OpenCV_LIBS})
+
+add_executable(zh_feladat1 zh/feladat1.cpp)
+target_link_libraries(zh_feladat1 ${OpenCV_LIBS})
